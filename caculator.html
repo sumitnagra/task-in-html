@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<style>
+    .continer {
+        border-radius: 10px;
+        border: 2px black solid;
+        position: absolute;
+        top: 20px;
+        left: 200px;
+    }
+
+    button {
+        border-radius: 8px;
+        font-size: 20px;
+        width: 5rem;
+        height: 2.5rem;
+    }
+
+    button:hover {
+        background-color: darkgrey;
+    }
+
+    .screen {
+        font-size: 20px;
+        margin: 35px 10px 0px 10px;
+        height: 64px;
+        width: 330px;
+        border-radius: 10px;
+    }
+
+    table {
+        margin: 10px;
+    }
+
+    #bulb {
+        background-color: Lightgreen;
+        height: 26px;
+        width: 25px;
+        border-radius: 50%;
+        position: absolute;
+        right: 10px;
+        top: 2px;
+    }
+
+    .onoff {
+        padding: 1px;
+        position: absolute;
+        height: 28px;
+        top: 3px;
+        right: 42px;
+        width: 50px;
+        border-radius: 5px
+    }
+
+    .onoff:hover {
+        background-color: darkgrey;
+
+    }
+</style>
+
+<body>
+    <h1>Calculator</h1>
+    <div class="continer">
+        <div>
+            <input type="button" value="OFF" class="onoff">
+            <span id="bulb"></span>
+        </div>
+        <input type="text" class="screen">
+        <table>
+            <tr>
+                <td><button>(</button></td>
+                <td><button>)</button></td>
+                <td><button>Clear</button></td>
+                <td><button>Back</button></td>
+            </tr>
+            <tr>
+                <td><button>7</button></td>
+                <td><button>8</button></td>
+                <td><button>9</button></td>
+                <td><button>+</button></td>
+            </tr>
+            <tr>
+                <td><button>4</button></td>
+                <td><button>5</button></td>
+                <td><button>6</button></td>
+                <td><button>X</button></td>
+            </tr>
+            <tr>
+                <td><button>1</button></td>
+                <td><button>2</button></td>
+                <td><button>3</button></td>
+                <td><button>-</button></td>
+            </tr>
+            <tr>
+                <td><button>0</button></td>
+                <td><button>.</button></td>
+                <td><button>/</button></td>
+                <td><button>=</button></td>
+            </tr>
+        </table>
+        <script>
+            let onoff = document.querySelector('.onoff');
+            let screen = document.querySelector('.screen');
+            let button = document.getElementsByTagName('button');
+
+            function off(e) {
+                if (e.target.value === 'OFF') {
+                    e.target.value = 'ON'
+                    document.getElementById('bulb').style.backgroundColor = "red";
+                    let att = document.createAttribute('disabled')
+                    att.value = "true";
+                button .setAttributeNode(att)
+                }
+                else {
+                    e.target.value = 'OFF'
+                    document.getElementById('bulb').style.backgroundColor = "lightgreen";
+                    button.removeAttribute("disabled")
+
+
+                }
+            }
+            onoff.addEventListener('click', off)
+
+
+            window.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    screen.value = screen.value.concat("=", eval(screen.value));
+                }
+
+            });
+            for (item of button) {
+
+                item.addEventListener('click', (e) => {
+                    buttonText = e.target.innerText;
+
+                    if (buttonText == 'X') {
+                        buttonText = '*'
+                        screen.value += buttonText;
+                    }
+                    else if (buttonText == 'Clear') {
+                        screen.value = "";
+                    }
+                    else if (buttonText == '=') {
+                        screen.value = screen.value.concat("=", eval(screen.value))
+                    }
+                    else if (buttonText == 'Back') {
+                        screen.value = screen.value.slice(0, -1)
+                    }
+
+
+                    else {
+                        screen.value += buttonText;
+                    }
+                }
+                )
+            } 
+        </script>
+    </div>
+</body>
+
+</html>

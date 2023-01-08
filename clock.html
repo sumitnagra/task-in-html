@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+</head>
+<style>
+    #alarm {
+        font-size: 70px;
+    }
+</style>
+
+<body onload="onload() ; setInterval('onload()',1000)">
+    <div id="clock">
+        <div id="alarm">hello</div>
+    </div>
+    <script>
+        function onload() {
+            let date = new Date();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let second = date.getSeconds();
+            let lesssecond = second < 10 ? `0${second}` : `${second}`
+            let lessminut = minute < 10 ? `0${minute}` : `${minute}`
+            let lesshour = hour > 12 ? `${hour - 12}` : `${hour}`
+        
+
+            let timeofday = (hour > 12) ? "PM" : "AM"
+            let clock = `${lesshour}:${lessminut}:${lesssecond} ${timeofday}`
+            document.getElementById('alarm').innerHTML = clock;
+        }
+    </script>
+</body>
+
+</html>

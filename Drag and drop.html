@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and drop </title>
+</head>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    .box {
+        display: inline-block;
+        background-color: bisque;
+        margin: 10px;
+        height: 150px;
+        width: 150px;
+    }
+
+    .image {
+        margin: 2px;
+        background-image: url('./Internet.gif');
+        background-size: 145px;
+        height: 145px;
+        width: 145px;
+        cursor: pointer;
+    }
+
+    .hide {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="box">
+        <div class="image" id="image" draggable="true"></div>
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+        let image = document.getElementById('image');
+        let whiteBox = document.querySelectorAll('.box')
+        image.addEventListener('dragstart', (e) => {
+            e.target.className += ' box';
+            setTimeout(() => {
+                e.target.className += ' hide';
+            }, 0);
+        })
+        image.addEventListener('dragend', (e) => {console.log("drag end");
+    e.target.className='image' })
+        for (box of whiteBox) {
+            box.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                console.log("dragover")
+            })
+            box.addEventListener('dragenter', (e) => { console.log("dragenter") })
+            box.addEventListener('dragleave', (e) => { console.log("deagleave") })
+            box.addEventListener('drop', (e) => {console.log("drop"); e.target.append(image) })
+        }
+    </script>
+</body>
+
+</html>

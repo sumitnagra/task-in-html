@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm</title>
+</head>
+<style>
+    #alarm {
+        width: 400px
+    }
+    
+</style>
+<body>
+        set Alarm
+    <input id="alarm" type="text" placeholder="Enter the time in yyyy-mm-dd hh:mm:ss">
+    <button onclick="set()">Set alarm</button>
+    <audio id="audio" src="C:\Users\Amrit nagra-pc\Downloads/loud_alarm.mp3"></audio>
+    <h3>Alarm is ring in <span id="remain">remain</span> second</h3>
+    <script>
+        var audio = document.getElementById('audio');
+        function set() {
+            let time = document.getElementById('alarm');
+            let date = new Date(time.value);
+            let now = new Date();
+            let interval = date - now;
+            let remin = Math.round(interval / 1000);
+            setTimeout(() => {
+                audio.play();
+            }, interval);
+
+            let totaltime = (Math.round(interval / 1000));
+            setInterval(timer,1000)
+        function timer(){
+                if (totaltime==0){
+                    clearInterval(timer)
+                }
+                else{
+                    totaltime = totaltime - 1;
+                document.getElementById('remain').innerHTML = totaltime;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
